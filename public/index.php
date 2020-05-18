@@ -1,27 +1,28 @@
 <?php
 
-require_once 'app/core/Core.php';
-
-require_once 'app/controller/ErrorController.php';
+use core\Core;
 
 require_once 'vendor/autoload.php';
 
 
-$rootDir = str_replace('public', '', __DIR__);
-
-$dotenv = Dotenv\Dotenv::createImmutable($rootDir);
+// load our environment files - used to store credentials & configuration
+$dotenv = Dotenv\Dotenv::createImmutable(getcwd());
 $dotenv->load();
 
-$template = file_get_contents($rootDir . 'app/template/template.html');
+require_once 'lib/autoload/autoload.php';
+require_once 'app/core/Core.php';
+require_once 'app/core/Router.php';
 
-ob_start();
+
+
+$template = file_get_contents(getcwd() . '/app/template/template.html');
+
+
 $core = new Core;
-$core->start($_GET);
-
-$response = ob_get_contents();
-ob_end_clean();
-
-$finishedTemplate = str_replace('{{dynamic_area}}', $response, $template);
+$response = $core->start();
 
 
-echo $finishedTemplate;
+echo str_replace('{{dynamic_area}}', $response, $template);
+
+
+

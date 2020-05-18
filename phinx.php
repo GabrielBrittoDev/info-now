@@ -1,8 +1,6 @@
 <?php
 
-// load our environment files - used to store credentials & configuration
-$dotenv = Dotenv\Dotenv::createImmutable(str_replace('public', '', __DIR__));
-$dotenv->load();
+
 
 return
     [
@@ -11,7 +9,7 @@ return
         ],
         'environments' =>
             [
-                'default_database' => 'development',
+                'default_database' => $_ENV['DB_DEFAULT'],
                 'default_migration_table' => 'phinxlog',
                 'development'      =>
                     [

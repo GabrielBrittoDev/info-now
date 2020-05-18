@@ -1,39 +1,28 @@
 <?php
 
+namespace core;
+
 class Core
 {
 
-    public function start($urlGet)
+
+    /**
+     * @return string
+     */
+    public function start()
     {
-        if ($urlGet){
-            $controller = ucfirst($urlGet['page'].'Controller');
-        } else {
-            $controller = 'HomeController';
-        }
+        $uri = $_SERVER['REQUEST_URI'];
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+        ob_start();
 
-        if (isset($urlGet['method'])) {
-            $action = $urlGet['method'];
-        } else {
-            $action = 'index';
-        }
+        $route = new Router($uri, $requestMethod);
+        include 'routes/Routes.php';
+        $content = ob_get_contents();
 
+        ob_end_clean();
 
-
-        if (!class_exists($controller)) {
-            $controller = 'ErrorController';
-        }
-
-
-        if (isset($urlGet['id']) && $urlGet['id'] != null) {
-            $id = $urlGet['id'];
-        } else {
-            $id = null;
-        }
-
-        dd($urlGet);
-
-        call_user_func_array(array(new $controller, $action), array('id' => $id));
-
+        return $content ? $content : file_get_contents(getcwd() . '/app/view/not_found.html');
     }
+
 }

@@ -4,7 +4,7 @@
 class ErrorController
 {
     public function index(){
-        return 'alouuuuuuuuu';
+        echo 'Error';
     }
 
 }
