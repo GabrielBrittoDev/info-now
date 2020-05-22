@@ -10,6 +10,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(getcwd());
 $dotenv->load();
 
 require_once 'lib/autoload/autoload.php';
+require_once 'lib/database/Connection.php';
 require_once 'app/core/Core.php';
 require_once 'app/core/Router.php';
 

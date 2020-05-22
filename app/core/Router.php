@@ -17,7 +17,7 @@ class Router
     public function get($route, $controllerAction)
     {
         $args = $this->isCorrectRoute($route);
-        if (!$args || $this->requestMethod != 'GET')
+        if ($args || $this->requestMethod != 'GET')
             return;
 
         $this->callFunction($controllerAction, $args);
@@ -26,7 +26,7 @@ class Router
     public function post($route, $controllerAction)
     {
         $args = $this->isCorrectRoute($route);
-        if (!$args || $this->requestMethod != 'POST')
+        if ($args || $this->requestMethod != 'POST')
             return;
 
         $args = array_merge(array('request' => $_POST), $args);
@@ -37,7 +37,7 @@ class Router
     public function delete($route, $controllerAction)
     {
         $args = $this->isCorrectRoute($route);
-        if (!$args || $this->requestMethod != 'DELETE')
+        if ($args || $this->requestMethod != 'DELETE')
             return;
 
         $this->callFunction($controllerAction, $args);
@@ -46,7 +46,7 @@ class Router
     public function put($route, $controllerAction)
     {
         $args = $this->isCorrectRoute($route);
-        if (!$args ||$this->requestMethod != 'PUT')
+        if ($args ||$this->requestMethod != 'PUT')
             return;
 
         parse_str(file_get_contents("php://input"),$putRequestBody);
@@ -84,7 +84,7 @@ class Router
             }
 
             if ($itemPassedRoute !== $definedRoute[$index]) {
-                return false;
+                return null;
             }
         }
 

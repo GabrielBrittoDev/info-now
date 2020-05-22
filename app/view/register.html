@@ -1,0 +1,38 @@
+<div class="container">
+<form method="post" action="/user">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email"  placeholder="seuemail@exemplo.com">
+    </div>
+    <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" name="name"  placeholder="Seu nome">
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username"  placeholder="Seu username">
+        <small id="usernameHelp" class="form-text text-muted">As pessoas acharão você atraves de seu username</small>
+    </div>
+    <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" id="password" name="password"  >
+    </div>
+    <div class="form-group">
+        <label for="confirm_password">Confirme sua senha</label>
+        <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+    </div>
+
+
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% if errors is defined %}
+{% for error in errors %}
+{{error}}
+{% endfor %}
+{% endif %}
+
+</div>

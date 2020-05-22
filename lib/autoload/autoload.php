@@ -1,8 +1,10 @@
 <?php
 
 function loadControllers($className){
-    $path = getcwd().'/app/controller/';
-    require_once $path . $className .'.php';
+    if (strpos($className, 'Controller')) {
+        $path = getcwd() . '/app/controller/';
+        require_once $path . $className . '.php';
+    }
 }
 
 function loadModels($className){
